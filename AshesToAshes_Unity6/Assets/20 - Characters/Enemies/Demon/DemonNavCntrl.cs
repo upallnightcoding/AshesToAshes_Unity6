@@ -6,7 +6,6 @@ public class DemonNavCntrl : MonoBehaviour
 
     private int nWayPoints;
     private int currentWayPoint;
-    private int nextWayPoint;
     private Vector3 direction;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -14,25 +13,26 @@ public class DemonNavCntrl : MonoBehaviour
     {
         nWayPoints = wayPoints.Length;
         currentWayPoint = 0;
-        nextWayPoint = 1;
+        
         direction = Vector3.zero;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float dist = Vector3.Distance(wayPoints[currentWayPoint].position, wayPoints[nextWayPoint].position);
+        float dist = Vector3.Distance(wayPoints[currentWayPoint].position, transform.position);
 
-        if (dist < 0.3f)
+        if (dist < 0.5f)
         {
             currentWayPoint = CalcNextWayPoint(currentWayPoint);
-            nextWayPoint = CalcNextWayPoint(nextWayPoint);
         } 
         
-        direction = wayPoints[nextWayPoint].position - wayPoints[currentWayPoint].position;
+        direction = wayPoints[currentWayPoint].position - transform.position;
         direction.y = 0.0f;
         Quaternion rotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.21f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1.5f);
+
+        transform.Translate(direction * 2.0f * Time.deltaTime, Space.World);
     }
 
     private int CalcNextWayPoint(int n)
