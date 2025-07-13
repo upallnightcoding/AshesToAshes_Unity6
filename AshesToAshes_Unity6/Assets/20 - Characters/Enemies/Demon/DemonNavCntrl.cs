@@ -14,45 +14,80 @@ public class DemonNavCntrl : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
 
         nWayPoints = wayPoints.Length;
         currentWayPoint = 0;
-        
+
+        agent = GetComponent<NavMeshAgent>();
+        agent.destination = wayPoints[currentWayPoint].position;
+        agent.isStopped = false;
+        agent.speed = 1.5f;
+        animator.SetBool("isRunning", true);
+
         direction = Vector3.zero;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        agent.destination = wayPoints[currentWayPoint].position;
-        //animator.SetBool("isRunning", true);
-
-        if (agent.velocity.magnitude != 0)
-        {
-            animator.SetBool("isRunning", true);
-            //agent.isStopped = true;
-        } else
-        {
-            animator.SetBool("isRunning", false);
-            //agent.isStopped = false;
-        }
-
-        float dist = Vector3.Distance(wayPoints[currentWayPoint].position, transform.position);
+        float dist = Vector3.Distance(agent.transform.position, wayPoints[currentWayPoint].position);
+        Debug.Log($"dist: {dist}/{agent.transform.position}/{wayPoints[currentWayPoint].position}");
 
         if (dist < 0.5f)
         {
             currentWayPoint = CalcNextWayPoint(currentWayPoint);
-        } 
+            agent.destination = wayPoints[currentWayPoint].position;
+        }
+    }
+
+    // Update is called once per frame
+    void xxUpdate()
+    {
+        animator.SetBool("isRunning", true);
+
+        if (agent.velocity.magnitude != 0)
+        {
+            //animator.SetBool("isRunning", true);
+            //agent.isStopped = true;
+        } else
+        {
+            //animator.SetBool("isRunning", false);
+        }
+
+        float dist = Vector3.Distance(agent.transform.position, wayPoints[currentWayPoint].position);
+        Debug.Log($"dist: {dist}/{agent.transform.position}/{wayPoints[currentWayPoint].position}");
+
+        if (dist < 0.5f)
+        {
+            currentWayPoint = CalcNextWayPoint(currentWayPoint);
+        } else
+        {
+            agent.destination = wayPoints[currentWayPoint].position;
+        }
+
+        Debug.Log($"Destination: {agent.destination}/{agent.velocity.magnitude}");
         
     }
 
-    private void OnAnimatorMove()
+    private void xxOnAnimatorMove()
     {
-        if (animator.GetBool("isRunning") == false)
+        Debug.Log($"OnAnimationMove: {animator.GetBool("isRunning")}");
+
+        /*if (animator.GetBool("isRunning") == true)
         {
-            //agent.speed = (animator.deltaPosition / Time.deltaTime).magnitude;
+            Debug.Log($"deltaPosition: {animator.deltaPosition}/{Time.deltaTime}");
+            agent.speed = (animator.deltaPosition / Time.deltaTime).magnitude;
+        }*/
+    }
+
+    private void xxxOnAnimatorMove()
+    {
+        Debug.Log($"OnAnimationMove: {animator.GetBool("isRunning")}");
+
+        if (animator.GetBool("isRunning") == true)
+        {
+            Debug.Log($"deltaPosition: {animator.deltaPosition}/{Time.deltaTime}");
+            agent.speed = (animator.deltaPosition / Time.deltaTime).magnitude;
         }
     }
 
