@@ -17,8 +17,8 @@ public class PlayerInputCntrl : MonoBehaviour
     private InputAction moveAction;
     private InputAction lookAction;
     private InputAction fireAction;
-    private InputAction dashAction;
-    private InputAction lightAction;
+    //private InputAction dashAction;
+    //private InputAction lightAction;
 
     private void Awake()
     {
@@ -27,20 +27,20 @@ public class PlayerInputCntrl : MonoBehaviour
         moveAction = inputActionMap.FindAction("Move");
         lookAction = inputActionMap.FindAction("Look");
         fireAction = inputActionMap.FindAction("Fire");
-        dashAction = inputActionMap.FindAction("Dash");
-        lightAction = inputActionMap.FindAction("AttackLight");
+        //dashAction = inputActionMap.FindAction("Dash");
+        //lightAction = inputActionMap.FindAction("AttackLight");
 
         moveAction.performed += OnMove;
         lookAction.performed += OnLook;
         fireAction.performed += OnFire;
-        dashAction.performed += OnDash;
-        lightAction.performed += OnLightAttack;
+        //dashAction.performed += OnDash;
+        //lightAction.performed += OnLightAttack;
 
         moveAction.canceled += OnMove;
         lookAction.canceled += OnLook;
         fireAction.canceled += OnFire;
-        dashAction.canceled += OnDash;
-        lightAction.canceled += OnLightAttack;
+        //dashAction.canceled += OnDash;
+        //lightAction.canceled += OnLightAttack;
     }
 
     private void OnLightAttack(InputAction.CallbackContext context)
