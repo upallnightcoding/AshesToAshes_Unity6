@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HeroMoveState : FsmState
 {
-    public static string STATE_NAME = "Idle";
+    public static string STATE_NAME = "Move";
 
     private HeroCntrl heroCntrl = null;
 

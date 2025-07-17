@@ -13,7 +13,7 @@ public class Fsm
         stateMap = new Dictionary<string, FsmState>();
     }
 
-    public void OnUpdate(GameObject go, float dt)
+    public void OnUpdate(float dt)
     {
 
         if (changedNewState)
@@ -22,11 +22,11 @@ public class Fsm
             currentState.OnEnter();
         }
 
-        string nextState = currentState.OnUpdate(go, dt);
+        string nextState = currentState.OnUpdate(dt);
 
         if (nextState != currentState.Name)
         {
-            currentState.OnExit(go);
+            currentState.OnExit();
             currentState = stateMap[nextState];
             changedNewState = true;
         }

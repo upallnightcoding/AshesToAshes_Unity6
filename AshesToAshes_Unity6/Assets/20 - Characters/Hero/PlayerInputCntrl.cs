@@ -60,7 +60,10 @@ public class PlayerInputCntrl : MonoBehaviour
 
     private void OnFire(InputAction.CallbackContext context)
     {
-        Fire = context.ReadValueAsButton();
+        if (context.performed)
+        {
+            Fire = context.ReadValueAsButton();
+        }
     }
 
     private void OnDash(InputAction.CallbackContext context)
