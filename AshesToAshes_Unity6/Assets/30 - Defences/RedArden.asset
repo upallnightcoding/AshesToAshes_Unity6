@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ee6ee3408b00f48bade41fa874077a, type: 3}
+  m_Name: RedArden
+  m_EditorClassIdentifier: 
+  projectileName: Red Arden
+  projectilePrefab: {fileID: 6511783606794334179, guid: ac429fc5b0cc2184c90bb9767982e2c7, type: 3}
+  damage: 100
+  duration: 2
+  projectileVFX: {fileID: 186320, guid: 721c8dcd5a6a97142ae111fbb4aade10, type: 3}
+  impactVFX: {fileID: 6456145071155264704, guid: 575eed18dcdf3384db5df0d9a109e37f, type: 3}
+  force: 500

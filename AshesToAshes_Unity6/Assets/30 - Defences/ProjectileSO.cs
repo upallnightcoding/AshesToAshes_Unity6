@@ -1,7 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewProjectile", menuName = "A2A/projectile")]
-public class ProjectileSO : ScriptableObject
+public abstract class ProjectileSO : ScriptableObject
 {
     public string projectileName;
 
@@ -18,4 +17,6 @@ public class ProjectileSO : ScriptableObject
 
     // The amount of force that is behind the projectile
     public float force;
+
+    public abstract void lunch(Transform player, Transform muzzlePoint);
 }

@@ -41,9 +41,9 @@ public class HeroCntrl : MonoBehaviour
 
         playerMove = playerInputCntrl.Move;
 
-        if (playerInputCntrl.Fire)
+        if (playerInputCntrl.AttackLight || playerInputCntrl.AttackHeavy)
         {
-            Fire();
+            ExecuteLightAttack();
         }
 
         fsm.OnUpdate(Time.deltaTime);
@@ -51,19 +51,23 @@ public class HeroCntrl : MonoBehaviour
         //Move(Time.deltaTime);
     }
 
-    public void Fire()
+    public void ExecuteLightAttack()
     {
         StartCoroutine(FireProjectile());
 
-        playerInputCntrl.Fire = false;
+        playerInputCntrl.AttackLight = false;
+        playerInputCntrl.AttackHeavy = false;
     }
 
     private IEnumerator FireProjectile()
     {
-        GameObject projectile = Instantiate(projectileSO.projectilePrefab, muzzlePoint.position, Quaternion.identity);
-        projectile.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSO.force);
-        projectile.GetComponent<ProjectileCntrl>().Set(projectileSO, projectile.transform, muzzlePoint, transform);
-        Destroy(projectile, projectileSO.duration);
+        //GameObject projectile = Instantiate(projectileSO.projectilePrefab, muzzlePoint.position, Quaternion.identity);
+        //projectile.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSO.force);
+        //projectile.GetComponent<ProjectileCntrl>().Set(projectileSO, projectile.transform, muzzlePoint, transform);
+        //Destroy(projectile, projectileSO.duration);
+
+        projectileSO.lunch(transform, muzzlePoint);
+
         yield return null;
     }
 

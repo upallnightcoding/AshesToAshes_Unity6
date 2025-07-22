@@ -54,7 +54,7 @@ MonoBehaviour:
   playerInputCntrl: {fileID: 2055945369126604502}
   rotationSpeed: 400
   muzzlePoint: {fileID: 3189556936725529558}
-  projectileSO: {fileID: 11400000, guid: 5859c81e9b759d84da35c76686f0dd3c, type: 2}
+  projectileSO: {fileID: 11400000, guid: 49272b89b6da5ec49a4ce94066220b3e, type: 2}
 --- !u!95 &8782013063816093327
 Animator:
   serializedVersion: 7
