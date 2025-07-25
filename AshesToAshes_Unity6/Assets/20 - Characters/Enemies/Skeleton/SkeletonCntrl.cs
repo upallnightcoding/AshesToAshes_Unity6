@@ -4,21 +4,32 @@ using UnityEngine.AI;
 public class SkeletonCntrl : MonoBehaviour
 {
     [SerializeField] private Transform follow;
+    [SerializeField] private Transform[] wayPoints;
 
     private NavMeshAgent agent;
     private Animator animator;
+
+    private int nWayPoints;
+    private int point;
+
+    private float seconds = 0.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
+        point = 0;
+        nWayPoints = wayPoints.Length;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move(follow.position);
+        //Move(follow.position);
+
+        Wonder();
     }
 
     /**
@@ -37,6 +48,21 @@ public class SkeletonCntrl : MonoBehaviour
     public bool isNearTarget()
     {
         return (false);
+    }
+
+    public void Wonder()
+    {
+        agent.destination = wayPoints[point].position;
+
+        if (agent && agent.hasPath)
+        {
+            float distance = Vector3.Distance(transform.position, agent.destination);
+
+            if (distance < 1.0f)
+            {
+                point = (point + 1) % nWayPoints;
+            }
+        }
     }
 
     /**
