@@ -14,26 +14,25 @@ public class DemonNavCntrl : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        animator = GetComponent<Animator>();
-
         nWayPoints = wayPoints.Length;
         currentWayPoint = 0;
+        direction = Vector3.zero;
 
         agent = GetComponent<NavMeshAgent>();
         agent.destination = wayPoints[currentWayPoint].position;
         agent.isStopped = false;
         agent.speed = 1.5f;
-        animator.SetBool("isRunning", true);
 
-        direction = Vector3.zero;
+        animator = GetComponent<Animator>();
+        animator.SetBool("isRunning", true);
     }
 
     void Update()
     {
-        float dist = Vector3.Distance(agent.transform.position, wayPoints[currentWayPoint].position);
-        Debug.Log($"dist: {dist}/{agent.transform.position}/{wayPoints[currentWayPoint].position}");
+        float distance = Vector3.Distance(agent.transform.position, wayPoints[currentWayPoint].position);
+        Debug.Log($"dist: {distance}/{agent.transform.position}/{wayPoints[currentWayPoint].position}");
 
-        if (dist < 0.5f)
+        if (distance < 0.5f)
         {
             currentWayPoint = CalcNextWayPoint(currentWayPoint);
             agent.destination = wayPoints[currentWayPoint].position;
