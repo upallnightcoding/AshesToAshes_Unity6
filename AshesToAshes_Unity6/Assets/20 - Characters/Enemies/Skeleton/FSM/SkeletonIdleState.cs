@@ -7,9 +7,9 @@ public class SkeletonIdleState : FsmState
     private float waitPeriod = 3.0f;
     private float seconds = 0.0f;
 
-    public SkeletonIdleState() : base(STATE_NAME)
+    public SkeletonIdleState(float waitPeriod) : base(STATE_NAME)
     {
-
+        this.waitPeriod = waitPeriod;
     }
 
     public override void OnEnter()
@@ -26,6 +26,6 @@ public class SkeletonIdleState : FsmState
     {
         seconds += dt;
 
-        return (seconds > waitPeriod ? SkeletonWonderState.STATE_NAME : SkeletonIdleState.STATE_NAME);
+        return (seconds > waitPeriod ? SkeletonWonderState.STATE_NAME : STATE_NAME);
     }
 }
