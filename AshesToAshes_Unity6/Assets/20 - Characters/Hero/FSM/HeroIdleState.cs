@@ -13,7 +13,7 @@ public class HeroIdleState : FsmState
 
     public override void OnEnter()
     {
-        heroCntrl.StopAnimation();
+        heroCntrl.StopMovement();
     }
 
     public override void OnExit()

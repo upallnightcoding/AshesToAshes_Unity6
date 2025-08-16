@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class SkeletonCntrl : MonoBehaviour
 {
-    private readonly float ROTATION_SPEED = 2.0f;
+    private readonly float ROTATION_SPEED = 15.0f;
 
     [SerializeField] private Transform follow;
     [SerializeField] private Transform[] wayPoints;
@@ -32,17 +32,35 @@ public class SkeletonCntrl : MonoBehaviour
         fsm = new Fsm();
         fsm.AddState(new SkeletonIdleState(3.0f));
         fsm.AddState(new SkeletonWonderState(this));
+        fsm.AddState(new SkeletonChaseState(this));
 
         transform.position = wayPoints[0].position;
         agent.destination = wayPoints[1].position;
     }
 
-
-
     // Update is called once per frame
     void Update()
     {
         fsm.OnUpdate(Time.deltaTime);
+    }
+
+    public int FindNearestWayPoint()
+    {
+        float nearest = 99999.0f;
+        int closest = -1;
+
+        for (int i = 0; i < nWayPoints; i++)
+        {
+            float distance = Vector3.Distance(wayPoints[i].position, transform.position);
+
+            if (distance < nearest)
+            {
+                nearest = distance;
+                closest = i;
+            }
+        }
+
+        return (closest);
     }
 
     /**
@@ -65,11 +83,18 @@ public class SkeletonCntrl : MonoBehaviour
      */
     public void TurnToNextSteeringPoint()
     {
-        //Vector3 direction = agent.steeringTarget - transform.position;
-        //Quaternion targetRotation = Quaternion.LookRotation(direction);
-        //transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * ROTATION_SPEED);
-
         TurnToPoint(agent.steeringTarget);
+    }
+
+    public void FollowHero()
+    {
+        agent.SetDestination(hero.position);
+
+        if (AgentHasPath())
+        {
+            TurnToPoint(agent.steeringTarget);
+        }
+
     }
 
     public void TurnToPoint(Vector3 target)

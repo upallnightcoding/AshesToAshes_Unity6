@@ -6,17 +6,17 @@ public class EnvironmentCntrl : MonoBehaviour
     [SerializeField] private GameObject hero;
     [SerializeField] private GameObject skeleton;
 
-    private NavMeshSurface nms = null;
+    private NavMeshSurface navMeshSurface = null;
 
     private void Awake()
     {
-        nms = GetComponent<NavMeshSurface>();
+        navMeshSurface = GetComponent<NavMeshSurface>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        nms.BuildNavMesh();
+        navMeshSurface.BuildNavMesh();
 
         hero.SetActive(true);
         skeleton.SetActive(true);

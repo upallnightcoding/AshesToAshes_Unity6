@@ -76,7 +76,7 @@ public class HeroCntrl : MonoBehaviour
         return (playerMove.magnitude > 0.2f);
     }
 
-    public void StopAnimation()
+    public void StopMovement()
     {
         animator.SetFloat(speedId, 0.0f);
     }

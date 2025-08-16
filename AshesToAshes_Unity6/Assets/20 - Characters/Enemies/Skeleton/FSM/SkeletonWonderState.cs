@@ -45,7 +45,7 @@ public class SkeletonWonderState : FsmState
                 skeleton.MoveToNextWayPoint();
             }
 
-            if (skeleton.DistanceToHero(1.0f))
+            if (skeleton.DistanceToHero(3.0f))
             {
                 nextState = SkeletonChaseState.STATE_NAME;
             }
