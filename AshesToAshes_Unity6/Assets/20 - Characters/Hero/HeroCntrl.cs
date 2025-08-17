@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class HeroCntrl : MonoBehaviour
 {
-    [SerializeField] private GameObject mainCamera;
-    [SerializeField] private PlayerInputCntrl playerInputCntrl;
-    [SerializeField] private float rotationSpeed = 400.0f;
     [SerializeField] private Transform muzzlePoint;
+    [SerializeField] private PlayerInputCntrl playerInputCntrl;
+
+    private GameObject mainCamera;
+
+    private float rotationSpeed = 400.0f;
 
     [SerializeField] private ProjectileSO projectileSO;
 
@@ -35,10 +37,14 @@ public class HeroCntrl : MonoBehaviour
         dashSpeedId = Animator.StringToHash("dashspeed");
     }
 
+    public void Initialize(GameObject mainCamera)
+    {
+        this.mainCamera = mainCamera;
+    }
+
     // Update is called once per frame
     void Update()
     {
-
         playerMove = playerInputCntrl.Move;
 
         if (playerInputCntrl.AttackLight || playerInputCntrl.AttackHeavy)
@@ -47,8 +53,6 @@ public class HeroCntrl : MonoBehaviour
         }
 
         fsm.OnUpdate(Time.deltaTime);
-
-        //Move(Time.deltaTime);
     }
 
     public void ExecuteLightAttack()

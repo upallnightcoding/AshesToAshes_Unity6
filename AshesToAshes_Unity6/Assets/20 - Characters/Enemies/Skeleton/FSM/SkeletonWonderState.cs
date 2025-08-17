@@ -5,9 +5,6 @@ public class SkeletonWonderState : FsmState
 {
     public static string STATE_NAME = "Wonder";
 
-    
-    private bool startWalking = false;
-
     private SkeletonCntrl skeleton = null;
 
     public SkeletonWonderState(SkeletonCntrl skeleton) 
@@ -18,7 +15,7 @@ public class SkeletonWonderState : FsmState
 
     public override void OnEnter()
     {
-
+        skeleton.StartWalking();
     }
 
     public override void OnExit()
@@ -32,12 +29,6 @@ public class SkeletonWonderState : FsmState
 
         if (skeleton.AgentHasPath())
         {
-            if (!startWalking)
-            {
-                startWalking = true;
-                skeleton.StartWalking();
-            }
-
             skeleton.TurnToNextSteeringPoint();
 
             if (skeleton.DistanceToDestination(0.5f))

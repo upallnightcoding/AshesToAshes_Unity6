@@ -3,13 +3,13 @@ using UnityEngine.AI;
 
 public class SkeletonCntrl : MonoBehaviour
 {
-    private readonly float ROTATION_SPEED = 15.0f;
+    private readonly float ROTATION_SPEED = 5.0f;
 
-    [SerializeField] private Transform follow;
-    [SerializeField] private Transform[] wayPoints;
-    [SerializeField] private Transform hero;
+    private Transform hero;
 
     private NavMeshAgent agent;
+
+    private Transform[] wayPoints;
 
     private Fsm fsm = null;
 
@@ -18,27 +18,31 @@ public class SkeletonCntrl : MonoBehaviour
     private int currentWayPoint = 0;
     private int nWayPoints;
 
-    public bool AgentHasPath() => (agent) && (agent.hasPath);
-    public void StartWalking() => animator.SetBool("walk", true);
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        nWayPoints = wayPoints.Length;
 
         agent = GetComponent<NavMeshAgent>();
+        agent.destination = wayPoints[1].position;
+
         animator = GetComponent<Animator>();
         
         fsm = new Fsm();
         fsm.AddState(new SkeletonIdleState(3.0f));
         fsm.AddState(new SkeletonWonderState(this));
         fsm.AddState(new SkeletonChaseState(this));
-
-        transform.position = wayPoints[0].position;
-        agent.destination = wayPoints[1].position;
     }
 
-    // Update is called once per frame
+    /**
+     * Initialize() - 
+     */
+    public void Initialize(Transform hero, Transform[] wayPoints)
+    {
+        this.hero       = hero;
+        this.wayPoints  = wayPoints;
+
+        nWayPoints = wayPoints.Length;
+    }
+
     void Update()
     {
         fsm.OnUpdate(Time.deltaTime);
@@ -61,6 +65,22 @@ public class SkeletonCntrl : MonoBehaviour
         }
 
         return (closest);
+    }
+
+    /**
+     * AgentHasPath() -
+     */
+    public bool AgentHasPath()
+    {
+        return((agent) && (agent.hasPath));
+    }
+
+    /**
+     * StartWalking() - 
+     */
+    public void StartWalking()
+    {
+        animator.SetBool("walk", true);
     }
 
     /**

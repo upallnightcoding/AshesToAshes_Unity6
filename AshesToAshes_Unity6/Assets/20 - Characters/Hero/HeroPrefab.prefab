@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5225004950515282088}
   - component: {fileID: 2055945369126604502}
   m_Layer: 0
-  m_Name: Hero
+  m_Name: HeroPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,10 +50,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 713577264d3587b4b9354e2b8cfdefe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
-  playerInputCntrl: {fileID: 2055945369126604502}
-  rotationSpeed: 400
   muzzlePoint: {fileID: 3189556936725529558}
+  playerInputCntrl: {fileID: 2055945369126604502}
+  mainCamera: {fileID: 0}
   projectileSO: {fileID: 11400000, guid: 49272b89b6da5ec49a4ce94066220b3e, type: 2}
 --- !u!95 &8782013063816093327
 Animator:
