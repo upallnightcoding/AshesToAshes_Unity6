@@ -14,12 +14,12 @@ public class SkeletonChaseState : FsmState
 
     public override void OnEnter()
     {
-       
+        skeleton.StartAttack();
     }
 
     public override void OnExit()
     {
-        
+        skeleton.EndAttack();
     }
 
     public override string OnUpdate(float dt)

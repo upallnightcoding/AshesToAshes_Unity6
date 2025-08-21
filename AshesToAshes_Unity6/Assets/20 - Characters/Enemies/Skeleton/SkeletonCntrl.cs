@@ -39,8 +39,7 @@ public class SkeletonCntrl : MonoBehaviour
     {
         this.hero       = hero;
         this.wayPoints  = wayPoints;
-
-        nWayPoints = wayPoints.Length;
+        this.nWayPoints = wayPoints.Length;
     }
 
     void Update()
@@ -75,13 +74,9 @@ public class SkeletonCntrl : MonoBehaviour
         return((agent) && (agent.hasPath));
     }
 
-    /**
-     * StartWalking() - 
-     */
-    public void StartWalking()
-    {
-        animator.SetBool("walk", true);
-    }
+    public void StartWalking() => animator.SetBool("walk", true);
+    public void StartAttack() => animator.SetBool("attack", true);
+    public void EndAttack() => animator.SetBool("attack", false);
 
     /**
      * DistanceToDestination() - Returns the distance between the next 

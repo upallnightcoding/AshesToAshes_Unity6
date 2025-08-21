@@ -32,18 +32,14 @@ public class EnvironmentCntrl : MonoBehaviour
         GameObject hero = Instantiate(heroPrefab, new Vector3(2.0f, 0.0f, 0.0f), Quaternion.identity);
         hero.GetComponent<HeroCntrl>().Initialize(mainCamera);
 
-        //yield return null;
-
         GameObject skeleton = Instantiate(skeletonPrefab, wayPoints[0].position, Quaternion.identity);
         skeleton.GetComponent<SkeletonCntrl>().Initialize(hero.transform, wayPoints);
 
-        skeleton = Instantiate(skeletonPrefab, wayPoints[0].position + new Vector3(2.0f, 0.0f, 0.0f), Quaternion.identity);
-        skeleton.GetComponent<SkeletonCntrl>().Initialize(hero.transform, wayPoints);
+        //skeleton = Instantiate(skeletonPrefab, wayPoints[0].position + new Vector3(2.0f, 0.0f, 0.0f), Quaternion.identity);
+        //skeleton.GetComponent<SkeletonCntrl>().Initialize(hero.transform, wayPoints);
 
-        skeleton = Instantiate(skeletonPrefab, wayPoints[0].position + new Vector3(-2.0f, 0.0f, 0.0f), Quaternion.identity);
-        skeleton.GetComponent<SkeletonCntrl>().Initialize(hero.transform, wayPoints);
-
-        //yield return null;
+        //skeleton = Instantiate(skeletonPrefab, wayPoints[0].position + new Vector3(-2.0f, 0.0f, 0.0f), Quaternion.identity);
+        //skeleton.GetComponent<SkeletonCntrl>().Initialize(hero.transform, wayPoints);
     }
 
     // Update is called once per frame
